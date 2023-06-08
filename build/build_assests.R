@@ -110,13 +110,16 @@ build_site_yaml <- function() {
   site_yaml <- gsub("- '", "- ", site_yaml)
 
   # tidy up file paths
-  for (ext in c("md", "pdf", "/")) {
+  for (ext in c("md", "pdf")) {
     site_yaml <- gsub(
       sprintf("\\.%s'", ext),
       sprintf("\\.%s", ext),
       site_yaml
     )
   }
+  site_yaml <- gsub(
+    "/'", "/", site_yaml
+  )
   writeLines(site_yaml, "build/mkdocs/mkdocs.yml", "")
 }
 
